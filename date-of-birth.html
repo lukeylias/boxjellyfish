@@ -16,24 +16,151 @@
         line-height: 1.5;
         display: flex;
         justify-content: center;
-        padding: 1rem;
+        padding: 2rem;
+        padding-top: 4rem;
         height: 100vh;
+        background-color: #fafafa;
       }
 
       main {
         max-width: 700px;
         width: 100%;
         display: flex;
+        flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        background-color: red;
+        background-color: #fff;
+        border-radius: 32px;
+        padding: 2rem;
+      }
+
+      h1 {
+        margin-bottom: 0.4rem;
+      }
+
+      p {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 32px;
+      }
+
+      .form-field__label {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .form-field__input {
+        border: 2px solid black;
+        border-radius: 4px;
+        width: 10ch;
+      }
+
+      .form-field__input-inline {
+        border: none;
+        width: 80px;
+      }
+
+      .form-field__input,
+      .form-field__input-inline {
+        color: #333;
+        padding: 8px;
+        font-size: 1.25rem;
+        min-height: 44px;
+        text-align: center;
+        appearance: textfield;
+      }
+
+      .form-field__input:focus {
+        outline: none;
+        border-color: #0066ff;
+        box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+      }
+
+      .form-field__input-inline:focus {
+        outline: none;
+        background-color: rgba(0, 102, 255, 0.05);
+      }
+
+      .form-field__input-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        border: 2px solid black;
+        border-radius: 4px;
+        padding: 4px;
+        width: fit-content;
+      }
+
+      .form-field__input-group:focus-within {
+        border-color: #0066ff;
+        box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+      }
+
+      .form-field__input::-webkit-outer-spin-button,
+      .form-field__input::-webkit-inner-spin-button,
+      .form-field__input-inline::-webkit-outer-spin-button,
+      .form-field__input-inline::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
       }
     </style>
   </head>
   <body>
     <main>
-      <button>label</button>
+      <h1>Date of birth</h1>
+      <p>
+        This is an example how you can simplify getting the user's age and
+        prefilling
+      </p>
+      <div class="form-field">
+        <label for="age" class="form-field__label">What's your age?</label>
+        <input type="number" id="age" class="form-field__input" />
+      </div>
+      <div class="form-field">
+        <label for="dateOfBirth" class="form-field__label"
+          >What's your date of birth?</label
+        >
+        <div class="form-field__input-group">
+          <input
+            type="number"
+            id="day"
+            class="form-field__input-inline"
+            placeholder="DD"
+          />
+          <span>/</span>
+          <input
+            type="number"
+            id="month"
+            class="form-field__input-inline"
+            placeholder="MM"
+          />
+          <span>/</span>
+          <input
+            type="number"
+            id="year"
+            class="form-field__input-inline"
+            placeholder="YYYY"
+          />
+        </div>
+      </div>
     </main>
-    <script></script>
+    <script>
+      const yearInput = document.getElementById("year");
+      const ageInput = document.getElementById("age");
+      ageInput.addEventListener("input", () => {
+        const currentYear = new Date().getFullYear();
+        const birthYear = currentYear - ageInput.value;
+        yearInput.value = birthYear;
+
+        console.log(birthYear);
+      });
+    </script>
   </body>
 </html>
