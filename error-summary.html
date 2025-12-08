@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error summary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Nunito Sans", system-ui, -apple-system, sans-serif;
+        line-height: 1.5;
+        height: 100vh;
+        background-color: #fff;
+      }
+
+      main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        min-height: 100vh;
+      }
+
+      section {
+        padding: 1.5rem 1.75rem 1.75rem;
+        border: 1px solid #ccc;
+        border-radius: 1px;
+        max-width: 480px;
+        width: 100%;
+        background-color: #fff;
+      }
+
+      h1 {
+        margin-bottom: 0.4rem;
+      }
+
+      p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 32px;
+      }
+
+      .form-field__label {
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .form-field__input-inline {
+        width: 80px;
+      }
+
+      .form-field__input,
+      .form-field__input-inline {
+        background-color: #fff;
+        border: 1px solid #888;
+        border-radius: 1px;
+        font-size: 1rem;
+        height: 3.5rem;
+        color: #000;
+        font-family: inherit;
+        padding: 0.875rem 1rem;
+        vertical-align: top;
+        text-align: start;
+        appearance: textfield;
+      }
+
+      .form-field__input-inline {
+        border: none;
+      }
+
+      .form-field__input:focus {
+        outline: none;
+        border-color: #0066ff;
+        box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+      }
+
+      .form-field__input-inline:focus {
+        outline: none;
+        background-color: rgba(0, 102, 255, 0.05);
+      }
+
+      .form-field__input-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px solid #888;
+        border-radius: 1px;
+        padding: 4px;
+        width: fit-content;
+      }
+
+      .form-field__input-group:focus-within {
+        border-color: #0066ff;
+        box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+      }
+
+      .form-field__input::-webkit-outer-spin-button,
+      .form-field__input::-webkit-inner-spin-button,
+      .form-field__input-inline::-webkit-outer-spin-button,
+      .form-field__input-inline::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      .primary-button {
+        color: #fff;
+        background-color: #000;
+        border: 0;
+        border-radius: 1px;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 800;
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        padding: 1.125rem 2.5rem;
+        margin-top: 16px;
+      }
+
+      .error-summary {
+        border: 4px solid #d4351c;
+        padding: 1rem 1rem;
+        margin-bottom: 2rem;
+        background-color: #ff000059;
+      }
+
+      .error-summary:focus {
+        outline: 3px solid #ffdd00;
+        outline-offset: 0;
+      }
+
+      .error-summary h2 {
+        color: #d4351c;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+
+      .error-summary__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .error-summary__list li {
+        margin-bottom: 0.5rem;
+      }
+
+      .error-summary__list a {
+        color: #d4351c;
+        font-weight: 700;
+        text-decoration: underline;
+      }
+
+      .error-summary__list a:hover {
+        color: #942514;
+      }
+
+      .error-summary__list a:focus {
+        outline: 3px solid #ffdd00;
+        outline-offset: 0;
+        background-color: #ffdd00;
+        color: #0b0c0c;
+      }
+
+      .form-field__error {
+        display: block;
+        color: #d4351c;
+        font-weight: 700;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+        padding-top: 0.25rem;
+      }
+
+      .form-field__input--error {
+        border: 2px solid #d4351c;
+      }
+
+      .form-field__input--error:focus {
+        outline: 3px solid #ffdd00;
+        outline-offset: 0;
+        box-shadow: none;
+      }
+
+      /* Form Field with Error */
+      .form-field--error .form-field__label {
+        color: #d4351c;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <form id="user-form" novalidate>
+          <h1>Error summary</h1>
+          <p>
+            This is an example how you can use error summaries to help
+            communicate all errors to a user
+          </p>
+          <div class="form-field">
+            <label for="age" class="form-field__label">First name</label>
+            <input
+              type="string"
+              id="firstName"
+              class="form-field__input"
+              aria-describedby="full-name-error"
+            />
+            <span id="full-name-error" class="form-field__error" hidden></span>
+          </div>
+          <div class="form-field">
+            <label for="email" class="form-field__label">Email</label>
+            <input
+              type="string"
+              id="email"
+              class="form-field__input"
+              aria-describedby="email-error"
+            />
+            <span id="email-error" class="form-field__error" hidden></span>
+          </div>
+          <div class="form-field">
+            <label for="phone" class="form-field__label">Phone</label>
+            <input
+              type="number"
+              id="phone"
+              class="form-field__input"
+              aria-describedby="phone-error"
+            />
+            <span id="phone-error" class="form-field__error" hidden></span>
+          </div>
+
+          <div
+            id="error-summary"
+            class="error-summary"
+            role="alert"
+            aria-labelledby="error-summary-title"
+            hidden
+          >
+            <h2 id="error-summary-title">There is an problem</h2>
+            <ul class="error-summary__list"></ul>
+          </div>
+          <button type="submit" class="primary-button">Submit</button>
+        </form>
+      </section>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("user-form");
+        const errorSummary = document.getElementById("error-summary");
+        const errorSummaryList = document.getElementBySelector(
+          "error-summary__list"
+        );
+
+        const validationRules = {};
+      });
+    </script>
+  </body>
+</html>
