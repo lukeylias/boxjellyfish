@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "a11ycat": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "a11ycat:latest"
+      ],
+      "env": {}
+    }
+  }
+}
